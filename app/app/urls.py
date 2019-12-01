@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
+from Profile import views as Profile_views
+
 
 urlpatterns = [
+    url(r'^Profile/$', Profile_views.profile_creation),
+    url(r'^profile_creation_post/$', Profile_views.profile_creation_post), 
     path('admin/', admin.site.urls),
 ]
