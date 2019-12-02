@@ -1,5 +1,5 @@
 {% extends 'index.html' %}
-{%load static%}
+{% load static %}
 {% block content %}
 <head>
 
@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Create Event</title>
+  <title>Event Info</title>
 
   <!-- Custom fonts for this template-->
   <link href="{% static 'css/all.min.css'%} rel="stylesheet" type="text/css">
@@ -23,60 +23,50 @@
 
   <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Create Event</div>
+      <div class="card-header">Event Information</div>
       <div class="card-body">
-        <form method="POST" action="/event_creation_post/">
-            {% csrf_token %}
+       
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-12">
                 <div class="form-label-group">
-                  <input type="text" id="EventName" name = "EventName" class="form-control" placeholder="Event Name" required="required" autofocus="autofocus">
-                  <label for="EventName">Event Name</label>
+                  {{ event.EventName }}
                 </div>
                 <br/>
               </div>
               
               <div class="col-md-12">
                   <div class="form-label-group">
-                    <input id="slug" name="slug" class="form-control" placeholder="slug" required="required">
-                    <label for="slug">slug</label>
+                    {{ EventInfo.slug }}
                   </div>
               </div>
               <br/>
               <div class="col-md-12">
                 <div class="form-label-group">
-                  <input id="EventDescription" name="EventDescription" class="form-control" placeholder="Event Description" required="required">
-                  <label for="EventDescription">Event Description</label>
-                  
+                    {{ EventInfo.EventDescription }}
                 </div>
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="text" id="EventLocation" name="EventLocation" class="form-control" placeholder="Event Location" required="required">
-              <label for="EventLocation">Event Location</label>
+              {{ EventInfo.EventLocation }}
             </div>
           </div>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="NoofAttendees" name="NoofAttendees" class="form-control" placeholder="No. of Attendees" required="required">
-                  <label for="NoofAttendees">No. of Attendees</label>
+                  {{ EventInfo.NoofAttendees }}
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="date" id="EventDate" name="EventDate" class="form-control" placeholder="Event Date" required="required">
-                  <label for="EventDate">Event Date</label>
+                    {{ EventInfo.EventDate }}
                 </div>
               </div>
             </div>
-          </div>
-          <input type="submit" class="btn btn-primary btn-block" value="Create Event">
-        </form>
+          </div>  
       </div>
     </div>
   </div>

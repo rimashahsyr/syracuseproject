@@ -24,7 +24,9 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^Event/$', Events_views.event_creation),
+    url(r'^$', Events_views.index),
     url(r'^event_creation_post/$', Events_views.event_creation_post),
+    url(r"^created_event/(.*)$", Events_views.created_event),
     url(r'^Profile/$', Profile_views.profile_creation),
     url(r'^profile_creation_post/$', Profile_views.profile_creation_post), 
     url(r'^login/$', loginViews.index, name='auth-social'),
