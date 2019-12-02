@@ -18,6 +18,8 @@ from django.urls import path
 from django.conf.urls import include, url
 from Events import views as Events_views
 from Profile import views as Profile_views
+from Login import views as loginViews
+from django.conf import settings
 
 
 urlpatterns = [
@@ -25,5 +27,8 @@ urlpatterns = [
     url(r'^event_creation_post/$', Events_views.event_creation_post),
     url(r'^Profile/$', Profile_views.profile_creation),
     url(r'^profile_creation_post/$', Profile_views.profile_creation_post), 
+    url(r'^login/$', loginViews.index, name='auth-social'),
+    url(r'auth-social/', include('social_django.urls', namespace='social')),
     path('admin/', admin.site.urls),
+
 ]
