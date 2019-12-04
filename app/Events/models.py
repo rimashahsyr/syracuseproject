@@ -12,11 +12,13 @@ location_choices = (('cafe_1', 'Starbucks'),
 class EventInfo(models.Model):
     EventName = models.CharField(max_length = 200)
     EventDescription = models.CharField(max_length = 200)
-    EventLocation = MultiSelectField(choices=location_choices)
+    EventLocation = models.CharField(max_length = 200)
     NoofAttendees = models.CharField(max_length = 100)
     EventDate = models.DateTimeField(blank=True, null=True)
 
-    def __str__(self):
-        return self.EventName
+def __str__(self):
+    return self.EventName
+
+    
     
    

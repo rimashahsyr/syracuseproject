@@ -1,6 +1,7 @@
 from django.shortcuts import render, render_to_response , get_object_or_404, HttpResponse
 from .models import EventInfo
 from django.views.generic import ListView, TemplateView
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 
 
 # Create your views here.
@@ -14,10 +15,9 @@ class Event_Creation(TemplateView):
     template_name = 'Event_Creation.html'
 
 def event_creation_post(request):
-
     EventName =  request.POST["EventName"]
     EventDescription =  request.POST["EventDescription"]
-    EventLocation =  request.POST["EventLocation"]
+    EventLocation =  request.POST.getlist('')
     NoofAttendees =  request.POST["NoofAttendees"]
     EventDate = request.POST["EventDate"]
     eventinfo = EventInfo()
@@ -29,10 +29,53 @@ def event_creation_post(request):
     print("before saving")
     eventinfo.save()
     print("after")
-    
-    return created_event(request, id)
+    events = EventInfo.objects.all()
+    return render(request, 'Event_Dashbord.html', {'events' : events})
 
 def created_event(request, id): 
     return render_to_response('Created_Event.html', {
         'event' : get_object_or_404(EventInfo, id=id)
     })
+
+def delete_event(request, id):
+    b = EventInfo.objects.get(id=id)
+    b.delete()
+    events = EventInfo.objects.all()
+    return render(request, 'Event_Dashbord.html', {'events' : events})
+
+def edit_event(request, id):
+    return render_to_response('Edit_Event.html', {
+        'event' : get_object_or_404(EventInfo, id=id)
+    })
+
+def edit_event_post(request, id):
+    print("hit")
+    #EventName =  request.POST["EventName"]
+    #slug = request.POST["slug"]
+    #EventDescription =  request.POST["EventDescription"]
+    #EventLocation =  request.POST["EventLocation"]
+    #NoofAttendees =  request.POST["NoofAttendees"]
+    #EventDate = request.POST["EventDate"]
+    # event = get_object_or_404(EventInfo, id=id)
+    # if request.method == "POST":
+    #     form = PostForm(request.POST , instance=event)
+    #     if form.is_valid():
+    #         event = form.save(commit = false)
+    #         event.EventName = request.EventName
+    #         event.save()
+    #         return render(request, 'Event_Dashbord.html', {'events' : events})
+    EventName =  request.POST["EventName"]
+    EventDescription =  request.POST["EventDescription"]
+    EventLocation =  request.POST["EventLocation"]
+    NoofAttendees =  request.POST["NoofAttendees"]
+    EventDate = request.POST["EventDate"]
+    eventinfo = EventInfo.objects.get(id=id)
+    print("before update")
+    eventinfo.EventName= EventName
+    eventinfo.EventDescription= EventDescription
+    eventinfo.EventLocation = EventLocation
+    eventinfo.NoofAttendees = NoofAttendees
+    eventinfo.EventDate = EventDate
+    eventinfo.update()
+    print("after update")
+    return render(request, 'Event_Dashbord.html', {'events' : events})
