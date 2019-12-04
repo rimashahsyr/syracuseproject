@@ -63,6 +63,10 @@ class Created_Event(View):
             'event' : get_object_or_404(EventInfo, id=id)
     })
 
+class Join_Event(View): 
+    def get(self, request, id): 
+        return HttpResponse("Event Joined")
+
 class Delete_Event(View):
     def get(self, request, id):
         b = EventInfo.objects.get(id=id)
