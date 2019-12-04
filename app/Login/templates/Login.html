@@ -169,6 +169,14 @@
 							</div>
 							<button type="submit">Login</button>
 							<h3><a href="/Profile/">Register</a> </h3>
+
+							{% for message in messages %}
+                    		<div class="alert alert-success">
+                      		<a class="close" href="#" data-dismiss="alert">×</a>
+							{{ message }}
+							  
+                   			 </div>
+           					{% endfor %}
 						  </form>
 					</div>
 					<div>
