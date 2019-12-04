@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response, get_object_or_404
 from .models import ProfileInfo
 
 # Create your views here.
 def profile_creation(request):
     return render(request, 'Profile_creation.html')
+
 
 
 def profile_creation_post(request):
@@ -23,7 +24,10 @@ def profile_creation_post(request):
     profileInfo.dateOfBirth=dateOfBirth
     profileInfo.locationCriteria=locationCriteria
     profileInfo.eventCategories=eventCategories
-    print("before Saving")
     profileInfo.save()
-    print("After Saving")
-    return render(request, "Profile_creation.html")
+    return created_profile(request, inputEmail)
+
+def created_profile(request, inputEmail): 
+    return render_to_response('Created_Profile.html', {
+        'profile' : get_object_or_404(ProfileInfo, inputEmail=inputEmail)
+    })

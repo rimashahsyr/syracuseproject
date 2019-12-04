@@ -1,25 +1,27 @@
 from django.shortcuts import render, render_to_response , get_object_or_404, HttpResponse
 from .models import EventInfo
+from django.views.generic import ListView, TemplateView
 
 
 # Create your views here.
-def index(request):
-    events = EventInfo.objects.all()
-    return render(request, 'Event_Dashbord.html', {'events' : events})
 
-def event_creation(request):
-    return render(request, 'Event_Creation.html')
+class Event_List_View(ListView):
+    template_name = 'Event_Dashbord.html'
+    model = EventInfo
+    context_object_name = "events"
+
+class Event_Creation(TemplateView):
+    template_name = 'Event_Creation.html'
 
 def event_creation_post(request):
+
     EventName =  request.POST["EventName"]
-    slug = request.POST["slug"]
     EventDescription =  request.POST["EventDescription"]
     EventLocation =  request.POST["EventLocation"]
     NoofAttendees =  request.POST["NoofAttendees"]
     EventDate = request.POST["EventDate"]
     eventinfo = EventInfo()
     eventinfo.EventName=EventName
-    eventinfo.slug = slug
     eventinfo.EventDescription=EventDescription
     eventinfo.EventLocation=EventLocation
     eventinfo.NoofAttendees=NoofAttendees

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'social_django',
     'Profile',
     'Events',
+    'multiselectfield',
 ]
 
 MIDDLEWARE = [
