@@ -30,9 +30,7 @@ def event_creation_post(request):
     eventinfo.save()
     print("after")
     
-    return HttpResponse("Page Created")
-    #events = EventInfo.objects.all()
-    #return render(request, 'Event_Dashbord.html', {'events' : events})
+    return created_event(request, id)
 
 def created_event(request, id): 
     return render_to_response('Created_Event.html', {
