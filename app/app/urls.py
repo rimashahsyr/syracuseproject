@@ -24,7 +24,7 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^Event/$', Events_views.Event_Creation.as_view()),
-    url(r'^$', Events_views.Event_List_View.as_view()),
+    url(r'^$', loginViews.index),
     url(r'^event_creation_post/$', Events_views.event_creation_post),
     url(r"^created_event/(.*)$", Events_views.created_event),
     url(r"^delete_event/(.*)$", Events_views.delete_event),

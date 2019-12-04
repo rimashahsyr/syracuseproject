@@ -17,7 +17,7 @@ class Event_Creation(TemplateView):
 def event_creation_post(request):
     EventName =  request.POST["EventName"]
     EventDescription =  request.POST["EventDescription"]
-    EventLocation =  request.POST.getlist('')
+    EventLocation =  request.POST.getlist('EventLocation')
     NoofAttendees =  request.POST["NoofAttendees"]
     EventDate = request.POST["EventDate"]
     eventinfo = EventInfo()

@@ -14,8 +14,8 @@ def profile_creation_post(request):
     userPassword = request.POST["userPassword"]
     phoneNumber = request.POST["phoneNumber"]
     dateOfBirth = request.POST["dateOfBirth"]
-    locationCriteria = request.POST["locationCriteria"]
-    eventCategories = request.POST["eventCategories"]
+    locationCriteria = request.POST.getlist("locationCriteria")
+    eventCategories = request.POST.getlist("eventCategories")
 
     profileInfo = ProfileInfo()
     profileInfo.firstName=firstName
