@@ -29,9 +29,11 @@ urlpatterns = [
     url(r"^created_event/(.*)$", Events_views.created_event),
     url(r'^Profile/$', Profile_views.profile_creation),
     url(r'^profile_creation_post/$', Profile_views.profile_creation_post),
-    url(r'^created_profile/(.*)$', Profile_views.created_profile), 
+    url(r'^created_profile/(.*)$', Profile_views.created_profile),
+    url(r'^login_post/$', loginViews.login_post), 
     url(r'^login/$', loginViews.index, name='auth-social'),
     url(r'auth-social/', include('social_django.urls', namespace='social')),
+    path('accounts/', include('allauth.urls')), # new
     path('admin/', admin.site.urls),
 
 ]
