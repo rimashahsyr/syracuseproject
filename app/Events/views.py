@@ -3,6 +3,7 @@ from .models import EventInfo
 from django.views.generic import ListView, TemplateView
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.views import View
+from Profile.models import ProfileInfo
 
 
 # Create your views here.
@@ -40,13 +41,15 @@ def event_creation_post(request):
     EventLocation =  request.POST.getlist('EventLocation')
     NoofAttendees =  request.POST["NoofAttendees"]
     EventDate = request.POST["EventDate"]
+    OwnerId = request.session.get('userid')
     eventinfo = EventInfo()
     eventinfo.EventName=EventName
     eventinfo.EventDescription=EventDescription
     eventinfo.EventLocation=EventLocation
     eventinfo.NoofAttendees=NoofAttendees
     eventinfo.EventDate=EventDate
-    print("before saving")
+    eventinfo.OwnerId = OwnerId
+    print(request.session.get('userid'))
     eventinfo.save()
     print("after")
     events = EventInfo.objects.all()
@@ -58,10 +61,19 @@ def event_creation_post(request):
     }) """
 
 class Created_Event(View): 
-    def get(self, request, id): 
-        return render_to_response('Created_Event.html', {
-            'event' : get_object_or_404(EventInfo, id=id)
-    })
+    def get(self, request, id):
+        OwnerId = request.session.get('userid')
+        user =  ProfileInfo.objects.get(id=OwnerId)
+        event = EventInfo.objects.get(id=id)
+        events = {
+            'EventName' : event.EventName,
+            'EventDescription' : event.EventDescription,
+            'EventLocation' : event.EventLocation,
+            'NoofAttendees' : event.NoofAttendees,
+            'EventDate' : event.EventDate,
+            'OwnerName' : user.firstName
+        }
+        return render_to_response('Created_Event.html', {'event' : events})
 
 class Delete_Event(View):
     def get(self, request, id):
