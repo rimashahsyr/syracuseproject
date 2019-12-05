@@ -75,6 +75,10 @@ class Created_Event(View):
         }
         return render_to_response('Created_Event.html', {'event' : events})
 
+class Join_Event(View): 
+    def get(self, request, id): 
+        return HttpResponse("Event Joined")
+
 class Delete_Event(View):
     def get(self, request, id):
         b = EventInfo.objects.get(id=id)
