@@ -1,6 +1,7 @@
 <!DOCTYPE html>
+
 {% load static %}
-<html lang="en">
+{% block content %}
 
 <head>
 
@@ -24,7 +25,7 @@
 
 <div class="container">
   <div class="card card-register mx-auto mt-5">
-    <div class="card-header">Create Profile</div>
+    <div class="card-header" style= "font-weight:bold;">Create Profile</div>
     <div class="card-body">
       <form method="POST" action="/profile_creation_post/">
         {% csrf_token %}
@@ -110,10 +111,11 @@
           
         </div>
       </div>
-        <input type="submit" class="btn btn-primary btn-block" value="Create Event">
+      <br/>
+        <input type="submit" class="btn btn-primary btn-block" value="Create Profile">
       </form>
       <div class="text-center">
-        <a class="d-block small mt-3" href="{% static 'login.html' %}">Login Page</a>
+        <a class="d-block small mt-3" href="/login/">Login Page</a>
         <a class="d-block small" href="{% static 'forgot-password.html' %}">Forgot Password?</a>
       
     </div>
@@ -129,4 +131,4 @@
 <!-- Java Script for Multiselect picklist -->
 <script src="{% static 'js/location-criteria.js' %}"></script>
 </body>
-</html>
+{% endblock %}

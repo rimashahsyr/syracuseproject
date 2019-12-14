@@ -164,6 +164,6 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 LOGIN_URL = '/auth/login/google-oauth2/'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/Dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 

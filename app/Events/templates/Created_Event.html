@@ -22,14 +22,14 @@
 <body class="bg-dark">
 
 <div class="container">
-<div class="card card-register mx-auto mt-5">
+    <div class="card card-register mx-auto mt-5" style="font-size: 15px;font-weight:bold;">
 <div class="card-header">Event Information</div>
   <div class="card-body">
 
     <div class="form-group">
       <div class="form-row">
         <div class="col-md-12">
-          <div class="form-label-group">
+              <div class="form-label-group" style="font-size: 15px; font-weight:bold;">
               Event Name : {{ event.EventName }}
           </div>
         </br>
@@ -50,15 +50,15 @@ Event Location : {{ event.EventLocation }}
 <div class="form-row">
 <div class="col-md-12">
   <div class="form-label-group">
-    Event Location : {{ event.NoofAttendees }}
+              Number of Attendees : {{ event.NoofAttendees }}
   </div>
 </div>
 </div>
 <br/>
-<div>
+        <div class="form-row">
 <div class="col-md-12">
   <div class="form-label-group">
-  Event Location : {{ event.EventDate }}
+              Event Date : {{ event.EventDate }}
   </div>
 </div>
 <div class="col-md-12">

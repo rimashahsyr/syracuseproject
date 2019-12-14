@@ -20,7 +20,8 @@ def login_post(request):
 
     try:
         ProfileInfo_ = ProfileInfo.objects.get(inputEmail=InputEmail, userPassword=userPassword)
-        events = EventInfo.objects.all()
+        events = EventInfo.objects.all() 
+		#return render(request, 'Event_Dashbord.html', {'events' : events})
         messages.success(request, 'SUCCESS!')
         session_id = request.session.get('userid',0) 
         request.session['userid'] = ProfileInfo_.id
