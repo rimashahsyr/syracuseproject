@@ -18,6 +18,7 @@ class Created_Profile(View):
     })
 
 
+
 def profile_creation_post(request):
 
     firstName = request.POST["firstName"]

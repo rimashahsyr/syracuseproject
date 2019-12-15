@@ -1,5 +1,6 @@
 {% extends 'index.html' %}
-{%load static%}
+{% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 <head>
 
@@ -27,50 +28,19 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Edit Event</div>
       <div class="card-body">
-        <form method="POST" action="/edit_event_post/{{ event.id }}">
-            {% csrf_token %}
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-12">
-                <div class="form-label-group">
-                  <input type="text" id="EventName" name = "EventName" class="form-control" placeholder="Event Name" required="required" value="{{ event.EventName }}" autofocus="autofocus">
-                  <label for="EventName">Event Name</label>
-                </div>
-                <br/>
-              </div>
-              <br/>
-              <div class="col-md-12">
-                <div class="form-label-group">
-                  <input id="EventDescription" name="EventDescription" class="form-control" placeholder="Event Description" value="{{ event.EventDescription }}" required="required">
-                  <label for="EventDescription">Event Description</label>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="form-label-group">
-              <input type="text" id="EventLocation" name="EventLocation" class="form-control" placeholder="Event Location" value="{{ event.EventLocation }}" required="required">
-              <label for="EventLocation">Event Location</label>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="text" id="NoofAttendees" name="NoofAttendees" class="form-control" value="{{ event.NoofAttendees }}" placeholder="No. of Attendees" required="required">
-                  <label for="NoofAttendees">No. of Attendees</label>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="date" id="EventDate" name="EventDate" class="form-control" value="{{ event.EventDate|date:'Y-m-d' }}" placeholder="Event Date" required="required">
-                  <label for="EventDate">Event Date</label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <input type="submit" class="btn btn-primary btn-block" value="Edit Event">
+        <form action="" method="post">
+          {% csrf_token %}
+          {{form|crispy}}
+          <!--{{form.id}}
+          {{form.EventName|as_crispy_field}}
+          {{form.EventDescription|as_crispy_field}}
+          {{form.EventLocation|as_crispy_field}}
+          {{form.NoofAttendees|as_crispy_field}}
+          {{form.EventDate|as_crispy_field}}-->
+
+          <br/>
+          <!--input type="submit" class="btn btn-primary btn-block" value="Edit Event">-->
+          <button type="submit" class="btn btn-primary btn-block">Edit</button>
         </form>
       </div>
     </div>

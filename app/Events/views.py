@@ -1,9 +1,10 @@
-from django.shortcuts import render, render_to_response , get_object_or_404, HttpResponse
+from django.shortcuts import render, render_to_response , get_object_or_404, HttpResponse, redirect
 from .models import EventInfo
 from django.views.generic import ListView, TemplateView
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.views import View
 from Profile.models import ProfileInfo
+from .forms import EventForm
 
 
 # Create your views here.
@@ -12,6 +13,12 @@ class Event_List_View(ListView):
     template_name = 'Event_Dashbord.html'
     model = EventInfo
     context_object_name = "events"
+
+class Event_List_View_form(ListView):
+    template_name = 'Event_Dashbord.html'
+    model = EventInfo
+    context_object_name = "events"
+    
 
 class Event_Creation(TemplateView):
     template_name = 'Event_Creation.html'
@@ -66,6 +73,7 @@ class Created_Event(View):
         user =  ProfileInfo.objects.get(id=OwnerId)
         event = EventInfo.objects.get(id=id)
         events = {
+            'id': event.id,
             'EventName' : event.EventName,
             'EventDescription' : event.EventDescription,
             'EventLocation' : event.EventLocation,
@@ -77,6 +85,10 @@ class Created_Event(View):
 
 class Join_Event(View): 
     def get(self, request, id): 
+        AttendeeId = request.session.get('userid')
+        EventId = id
+        eventinfo = EventInfo.objects.get(id=id)
+        eventinfo.Attendee.add(AttendeeId)
         return HttpResponse("Event Joined")
 
 class Delete_Event(View):
@@ -134,3 +146,28 @@ def edit_event_post(request, id):
     print("after update")
     events = EventInfo.objects.all()
     return render(request, 'Event_Dashbord.html', {'events' : events})
+
+
+def editEvent_form(request, id=0):
+    if request.method == "GET":
+        if id==0:
+            form = EventForm()
+        else:
+            print("afterGET")
+            events = EventInfo.objects.get(pk=id)
+            form = EventForm(instance=events)
+        return render(request, "Edit_Event.html", {'form':form})
+    else:
+        if id==0:
+            print("if id=0")
+            form = EventForm(request.POST)
+        else:
+            print("beforeprint else")
+            events = EventInfo.objects.get(pk=id)
+            form = EventForm(request.POST, instance=events)
+            print("afterprint else")
+        if form.is_valid():
+            print("beforeprint update")
+            form.save()
+            print("afterprint update")
+        return redirect('/Dashboard')

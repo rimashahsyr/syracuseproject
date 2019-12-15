@@ -21,28 +21,17 @@ def login_post(request):
     try:
         ProfileInfo_ = ProfileInfo.objects.get(inputEmail=InputEmail, userPassword=userPassword)
         events = EventInfo.objects.all() 
-		#return render(request, 'Event_Dashbord.html', {'events' : events})
         messages.success(request, 'SUCCESS!')
         session_id = request.session.get('userid',0) 
         request.session['userid'] = ProfileInfo_.id
         id_session = request.session.get('userid')
-        id = request.session['id']
-        # context = {
-        #     'EventName' : events.EventName,
-        #     'EventDescription' : events.EventDescription,
-        #     'EventLocation' : events.EventLocation,
-        #     'NoofAttendees' : events.NoofAttendees,
-        #     'EventDate' : events.EventDate,
-        #     'Userid' : request.session.get('id', 0)
-        # }
+        id = request.session['userid']
+       
         return render(request, 'Event_Dashbord.html', {'events' : events ,'id': id_session})
-        #return render_to_response('Event_Dashbord.html', 
-        #{'events' : events}, context_instance=RequestContext(request))
-    
+        
     except ProfileInfo.DoesNotExist: 
         print("username..")
         messages.error(request, "Username or Password not correct.")
         return render(request, 'Login.html')
-
 
 
