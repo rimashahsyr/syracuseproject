@@ -4,15 +4,17 @@ from Events.models import EventInfo
 from django.contrib import messages
 from django.template import RequestContext
 #from social.apps.django_app.default.models import social_auth_usersocialauth
-
-
 # Create your views here.
+
+# Just to chek if the connect is correct or not
 def login(request):
     return HttpResponse('login')
     
+# Index page loading.    
 def index(request):
     return render(request, 'Login.html')
 
+# Profile display function
 
 def login_post(request):
     InputEmail = request.POST["userEmail"]
@@ -33,6 +35,8 @@ def login_post(request):
         print("username..")
         messages.error(request, "Username or Password not correct.")
         return render(request, 'Login.html')
+
+#Log Out View function
 
 def logout(request):
     del request.session['userid']
