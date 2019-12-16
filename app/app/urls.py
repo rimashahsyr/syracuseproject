@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^new/$', Events_views.Event_List_View_form.as_view()),
     url(r"^edit_event/$", Events_views.editEvent_form),
     url(r"^NewCreatedEvent/(?P<id>\d+)$", Events_views.editEvent_form),
-    
+    url(r'^My_Events/$', Events_views.my_events),
     url(r"^edit_event_post/(.*)$", Events_views.edit_event_post),
     url(r'^Profile/$', Profile_views.Profile_Creation.as_view()),
     url(r'^profile_creation_post/$', Profile_views.profile_creation_post),

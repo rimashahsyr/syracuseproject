@@ -56,17 +56,30 @@ def event_creation_post(request):
     eventinfo.NoofAttendees=NoofAttendees
     eventinfo.EventDate=EventDate
     eventinfo.OwnerId = OwnerId
-    print(request.session.get('userid'))
+    #print(request.session.get('userid'))
     eventinfo.save()
-    print("after")
+    #print("after")
+    #events = EventInfo.objects.filter(OwnerId=OwnerId)
     events = EventInfo.objects.all()
+    return render(request, 'Event_Dashbord.html', {'events' : events})
+
+def my_events(request):
+    
+    OwnerId = request.session.get('userid')
+    eventinfo = EventInfo()
+   
+    eventinfo.OwnerId = OwnerId
+    #print(request.session.get('userid'))
+    #print("after")
+    #events = EventInfo.objects.filter(OwnerId=OwnerId)
+    events = EventInfo.objects.filter(OwnerId=OwnerId)
     return render(request, 'Event_Dashbord.html', {'events' : events})
 
 """ def created_event(request, id): 
     return render_to_response('Created_Event.html', {
         'event' : get_object_or_404(EventInfo, id=id)
-    }) """
-
+    })
+ """
 class Created_Event(View): 
     def get(self, request, id):
         OwnerId = request.session.get('userid')
