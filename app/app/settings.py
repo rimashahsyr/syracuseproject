@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google', # new
     'multiselectfield',
     'crispy_forms',
+    'NearbyEvents',
 
 ]
 

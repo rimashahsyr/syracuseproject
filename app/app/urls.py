@@ -20,6 +20,7 @@ from Events import views as Events_views
 from Profile import views as Profile_views
 from Login import views as loginViews
 from django.conf import settings
+from NearbyEvents import views as nearby_events_views
 
 
 urlpatterns = [
@@ -53,6 +54,9 @@ urlpatterns = [
     url(r'^Profile/$', Profile_views.Profile_Creation.as_view()),
     url(r'^profile_creation_post/$', Profile_views.profile_creation_post),
     url(r'^created_profile/(.*)$', Profile_views.Created_Profile.as_view()),
+    
+    #Map URLS
+    url(r'^NearbyEvents/$', nearby_events_views.default_maps, name='default'),
     
     #Admin URLS
     path('admin/', admin.site.urls),
