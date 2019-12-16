@@ -34,4 +34,7 @@ def login_post(request):
         messages.error(request, "Username or Password not correct.")
         return render(request, 'Login.html')
 
+def logout(request):
+    del request.session['userid']
+    return render(request, 'Login.html')
 

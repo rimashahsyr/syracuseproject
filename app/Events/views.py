@@ -67,7 +67,6 @@ def my_events(request):
     
     OwnerId = request.session.get('userid')
     eventinfo = EventInfo()
-   
     eventinfo.OwnerId = OwnerId
     #print(request.session.get('userid'))
     #print("after")
@@ -162,25 +161,22 @@ def edit_event_post(request, id):
 
 
 def editEvent_form(request, id=0):
+    OwnerId = request.session.get('userid')
     if request.method == "GET":
         if id==0:
             form = EventForm()
         else:
-            print("afterGET")
             events = EventInfo.objects.get(pk=id)
             form = EventForm(instance=events)
         return render(request, "Edit_Event.html", {'form':form})
     else:
         if id==0:
-            print("if id=0")
             form = EventForm(request.POST)
         else:
-            print("beforeprint else")
             events = EventInfo.objects.get(pk=id)
             form = EventForm(request.POST, instance=events)
-            print("afterprint else")
         if form.is_valid():
-            print("beforeprint update")
-            form.save()
-            print("afterprint update")
+            obj = form.save(commit=False)
+            obj.OwnerId = OwnerId
+            obj.save()
         return redirect('/Dashboard')

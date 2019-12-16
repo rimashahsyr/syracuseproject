@@ -1,7 +1,9 @@
-from django.shortcuts import render, render_to_response, get_object_or_404
+from django.shortcuts import render, render_to_response, get_object_or_404, redirect
 from .models import ProfileInfo
 from django.views import View
 from django.views.generic import TemplateView
+from .forms import ProfileForm
+
 
 # Create your views here.
 """ def profile_creation(request):
@@ -77,3 +79,21 @@ def profile_creation_post(request):
         'profile' : get_object_or_404(ProfileInfo, inputEmail=inputEmail)
     }) """
 
+def editProfile_form(request, id=0):
+    if request.method == "GET":
+        if id==0:
+            form = ProfileForm()
+        else:
+            profiles = ProfileInfo.objects.get(pk=id)
+            form = ProfileForm(instance=profiles)
+        return render(request, "Edit_Profile.html", {'form':form})
+    else:
+        if id==0:
+            form = ProfileForm(request.POST)
+        else:
+            profiles = ProfileInfo.objects.get(pk=id)
+            form = ProfileForm(request.POST, instance=profiles)
+        if form.is_valid():
+            form.save()
+            profiles = ProfileInfo.objects.get(pk=id)
+        return redirect('/Dashboard')

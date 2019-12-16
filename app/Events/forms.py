@@ -7,4 +7,7 @@ class EventForm(forms.ModelForm):
         model= EventInfo
         fields = ('EventName', 'EventDescription', 'EventLocation', 'NoofAttendees', 'EventDate')
         #fields = '__all__'
+        widgets = {
+            'EventDate': forms.DateTimeInput(attrs={'class':'form-control'}),
+        }
 
