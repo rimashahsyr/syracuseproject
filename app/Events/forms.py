@@ -2,6 +2,10 @@ from django import forms
 from .models import EventInfo
 
 class EventForm(forms.ModelForm):
+    EventDate = forms.DateTimeField(
+        label='Event Date',
+        widget=forms.widgets.DateInput(attrs={'type':'date'}),
+    )
     
     class Meta:
         model= EventInfo
