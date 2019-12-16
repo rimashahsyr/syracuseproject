@@ -91,7 +91,10 @@ class Created_Event(View):
             'EventLocation' : event.EventLocation,
             'NoofAttendees' : event.NoofAttendees,
             'EventDate' : event.EventDate,
-            'OwnerName' : user.firstName
+            'OwnerName' : user.firstName,
+            'OwnerId' : event.OwnerId,
+            'IsInitialized' : event.IsInitialized,
+            'UserId' : request.session.get('userid')
         }
         return render_to_response('Created_Event.html', {'event' : events})
 
@@ -100,8 +103,13 @@ class Join_Event(View):
         AttendeeId = request.session.get('userid')
         EventId = id
         eventinfo = EventInfo.objects.get(id=id)
-        eventinfo.Attendee.add(AttendeeId)
-        return HttpResponse("Event Joined")
+        count = eventinfo.Attendee.count()
+        capacity = eventinfo.NoofAttendees
+        if count < capacity:
+            eventinfo.Attendee.add(AttendeeId)
+            return HttpResponse("Event Joined")
+        else:
+            return HttpResponse("Event Full")
 
 class Delete_Event(View):
     def get(self, request, id):
@@ -180,3 +188,7 @@ def editEvent_form(request, id=0):
             obj.OwnerId = OwnerId
             obj.save()
         return redirect('/Dashboard')
+
+def InitializeEvent_form(request, id): 
+    EventInfo.objects.filter(id=id).update(IsInitialized=True) 
+    return HttpResponse("Event Initialized")
