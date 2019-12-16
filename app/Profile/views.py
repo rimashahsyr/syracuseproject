@@ -9,10 +9,11 @@ from .forms import ProfileForm
 """ def profile_creation(request):
     return render(request, 'Profile_creation.html') """
 
+#Profile creating index page
 class Profile_Creation(TemplateView):
     template_name = 'Profile_creation.html'
 
-
+# Loading the created profile
 class Created_Profile(View):
     def created_profile(self, request, inputEmail):
         return render_to_response('Created_Profile.html', {
@@ -20,7 +21,7 @@ class Created_Profile(View):
     })
 
 
-
+#function for creating the profile and saving it in the database.
 def profile_creation_post(request):
 
     firstName = request.POST["firstName"]
@@ -78,6 +79,8 @@ def profile_creation_post(request):
     return render_to_response('Created_Profile.html', {
         'profile' : get_object_or_404(ProfileInfo, inputEmail=inputEmail)
     }) """
+
+#Edit and crete event code same for both the pages.
 
 def editProfile_form(request, id=0):
     if request.method == "GET":

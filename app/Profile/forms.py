@@ -1,6 +1,7 @@
 from django import forms
 from .models import ProfileInfo
 
+#form for creating and editing a profile.
 class ProfileForm(forms.ModelForm):
     
     class Meta:
