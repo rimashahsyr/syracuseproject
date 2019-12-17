@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
 <html>
 <head>
 	<title> My maps </title>
@@ -24,7 +27,7 @@
     <div>
     
     </div>
-	<div id='map' style='width: 95%; height:850px;'></div>
+	<div id='map' style='width: 100%; height:600px;'></div>
 	
 	<script>
         
@@ -120,3 +123,4 @@
 
 </body>
 </html>	
+{% endblock %}
