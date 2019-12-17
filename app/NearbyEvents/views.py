@@ -1,17 +1,17 @@
 from django.shortcuts import render
 from mapbox import Directions
 from .models import LocationPreferences
+from Events.models import EventInfo
 from django.core.serializers import serialize
+
 # Create your views here.
 # TODO: move Token to settings.py file
 
 def default_maps(request):
+    eventinfo = EventInfo.objects.all().values_list('EventLocation', flat=True)
+    
     locationPreferences = LocationPreferences()
-    """ lat = locationPreferences.lat
-    lon = locationPreferences.lon """
-    #locations = LocationPreferences.objects.all()
-    locations = serialize('json', LocationPreferences.objects.all())
-    #print (locations.cafeName)
+    locations = serialize('json', LocationPreferences.objects.filter(id__in=eventinfo))
 
 
     

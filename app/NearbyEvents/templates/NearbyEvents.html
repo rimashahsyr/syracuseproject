@@ -5,19 +5,27 @@
 	<title> My maps </title>
 	<script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
 	<link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+
+	<style>
+	.mapboxgl-popup {
+	 max-width: 200px;
+	}
+	
+	.mapboxgl-popup-content {
+	  text-align: center;
+	  font-family: 'Open Sans', sans-serif;
+	}
+    </style>
+		
 </head>
 
 <body>
     <h2> Nearby Events</h2>
     <div>
-    {% block content %}
-    {% for LocationPreferences in locations  %}
-        {{ LocationPreferences.cafeName }}
-    {% endfor %}
-    {% endblock %}
-    </div>
-    <div id='map' style='width: 95%; height:850px;'></div>
     
+    </div>
+	<div id='map' style='width: 95%; height:850px;'></div>
+	
 	<script>
         
         
@@ -39,10 +47,11 @@
         
         var obj = JSON.parse('{{ locations|safe }}');
         for (var Lp in obj){
-            //console.log(obj[0]['fields']['cafeName'])
-            console.log(obj[Lp]['fields']['lat'])
+            //var title = ([obj[Lp]['fields']['cafeName']);
             var marker = new mapboxgl.Marker()
   			.setLngLat([obj[Lp]['fields']['lon'], obj[Lp]['fields']['lat']])
+			.setPopup(new mapboxgl.Popup({ offset: 25 })
+			.setHTML('<h3>' + obj[Lp]['fields']['cafeName'] + '</h3>'))
   			.addTo(map);
         }
         // display a blue marker
@@ -76,6 +85,8 @@
 		            break;
 		        }
 		    }
+
+
 
 		    map.addLayer({
 		        'id': '3d-buildings',
