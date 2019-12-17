@@ -2,21 +2,19 @@ from django.db import models
 
 # Create your models here.
 CHOICES = (
-    ('1', 'Books'),
-    ('2', 'Sports'),
-    ('3', 'Learning'),
-    ('4', 'Travel'),
-    ('5', 'Technical'),
-    ('6', 'Music'),   
+    ('Books', 'Books'),
+    ('Sports', 'Sports'),
+    ('Learning', 'Learning'),
+    ('Travel', 'Travel'),
+    ('Technical', 'Technical'),
+    ('Music', 'Music'),   
 )
 
 OPTIONS = (
-    ('Starbucks', 'Starbucks'),
-    ('Recess Coffee', 'Recess Coffee'),
-    ('Dunkin Donuts', 'Dunkin Donuts'),
-    ('Dorians', 'Dorians'),
+    ('Recess Cafe', 'Recess Cafe'),
+    ('Dunkin', 'Dunkin'),
     ('Alto Cinco', 'Alto Cinco'),
-    ('Pages Cafe', 'Pages Cafe'),   
+    ('Starbucks', 'Starbucks'),   
 )
 
 

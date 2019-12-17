@@ -39,7 +39,7 @@ urlpatterns = [
     url(r"^NewCreatedEvent/(?P<id>\d+)$", Events_views.editEvent_form),
     url(r'^My_Events/$', Events_views.my_events),
     url(r"^edit_event_post/(.*)$", Events_views.edit_event_post),
-    url(r"^NewCreatedProfile/(?P<id>\d+)$", Profile_views.editProfile_form),
+    
     
    #Login URLS
     url(r'^$', loginViews.index),
@@ -54,6 +54,7 @@ urlpatterns = [
     url(r'^Profile/$', Profile_views.Profile_Creation.as_view()),
     url(r'^profile_creation_post/$', Profile_views.profile_creation_post),
     url(r'^created_profile/(.*)$', Profile_views.Created_Profile.as_view()),
+    url(r"^NewCreatedProfile/(?P<id>\d+)$", Profile_views.editProfile_form),
     
     #Map URLS
     url(r'^NearbyEvents/$', nearby_events_views.default_maps, name='default'),

@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.views import View
 from Profile.models import ProfileInfo
 from .forms import EventForm
+from django.contrib import messages
 
 
 # Create your views here.
@@ -84,6 +85,7 @@ class Created_Event(View):
         OwnerId = request.session.get('userid')
         user =  ProfileInfo.objects.get(id=OwnerId)
         event = EventInfo.objects.get(id=id)
+        count = event.Attendee.count()
         events = {
             'id': event.id,
             'EventName' : event.EventName,
@@ -94,6 +96,7 @@ class Created_Event(View):
             'OwnerName' : user.firstName,
             'OwnerId' : event.OwnerId,
             'IsInitialized' : event.IsInitialized,
+            'AttendeesJoined': count,
             'UserId' : request.session.get('userid')
         }
         return render_to_response('Created_Event.html', {'event' : events})
@@ -105,11 +108,15 @@ class Join_Event(View):
         eventinfo = EventInfo.objects.get(id=id)
         count = eventinfo.Attendee.count()
         capacity = eventinfo.NoofAttendees
+        events = EventInfo.objects.all()
         if count < capacity:
             eventinfo.Attendee.add(AttendeeId)
-            return HttpResponse("Event Joined")
+            
+            return render(request, 'Event_Dashbord.html', {'events' : events})
         else:
-            return HttpResponse("Event Full")
+            messages.error(request, "Sorry! Event is full")
+            return render(request, 'Event_Dashbord.html', {'events' : events})
+            
 
 class Delete_Event(View):
     def get(self, request, id):
@@ -191,4 +198,5 @@ def editEvent_form(request, id=0):
 
 def InitializeEvent_form(request, id): 
     EventInfo.objects.filter(id=id).update(IsInitialized=True) 
-    return HttpResponse("Event Initialized")
+    events = EventInfo.objects.all()
+    return render(request, 'Event_Dashbord.html', {'events' : events})
