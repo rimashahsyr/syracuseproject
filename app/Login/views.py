@@ -22,7 +22,7 @@ def login_post(request):
 
     try:
         ProfileInfo_ = ProfileInfo.objects.get(inputEmail=InputEmail, userPassword=userPassword)
-        messages.success(request, 'SUCCESS!')
+        #messages.success(request, 'SUCCESS!')
         session_id = request.session.get('userid',0) 
         request.session['userid'] = ProfileInfo_.id
         id_session = request.session.get('userid')
