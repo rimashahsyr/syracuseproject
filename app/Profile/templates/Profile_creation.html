@@ -24,7 +24,7 @@
 <body class="bg-dark">
 
 <div class="container">
-  <div class="card card-register mx-auto mt-5">
+  <div class="card mx-auto mt-5">
     <div class="card-header" style= "font-weight:bold;">Create Profile</div>
     <div class="card-body">
       <form method="POST" action="/profile_creation_post/">
@@ -82,12 +82,13 @@
           <div>
               <label>Location Preferences</label>
             </div>
-          <select multiple name="locationCriteria" class = "browser-default custom-select">
-              <option value="Cafe 1" selected="selected">Cafe 1</option>
-              <option value="Cafe 2">Cafe 2</option>
-              <option value="Cafe 3">Cafe 3</option>
-              <option value="Cafe 4">Cafe 4</option>
+            <select multiple name="locationCriteria" class = "browser-default custom-select">
+              <option value="Recess Cafe" selected="selected">Recess Cafe</option>
+              <option value="Dunkin">Dunkin</option>
+              <option value="Alto Cinco">Alto Cinco</option>
+              <option value="Starbucks">Starbucks</option>
             </select>
+            
   </div>
           
           <!-- <div class="form-group">
@@ -102,13 +103,14 @@
                 <div>
                     <label>Event Categories</label>
                   </div>
-          <select multiple name="eventCategories" class = "browser-default custom-select">
-            <option value="eventtype_1" selected="selected">Event Type 1</option>
-            <option value="eventtype_2">Event Type 2</option>
-            <option value="eventtype_3">Event Type 3</option>
-            <option value="eventtype_4">Event Type 4</option>
-          </select>
-          
+                  <select multiple name="eventCategories" class = "browser-default custom-select">
+                    <option value="Books" selected="selected">Books</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Learning">Learning</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Technical">Technical</option>
+                    <option value="Music">Music</option>
+                  </select>
         </div>
       </div>
       <br/>

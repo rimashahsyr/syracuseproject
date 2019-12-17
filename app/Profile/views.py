@@ -44,8 +44,9 @@ def profile_creation_post(request):
     profileInfo.eventCategories=eventCategories
     profileInfo.save()
     
-    created_profile = Created_Profile()
-    return created_profile.created_profile(request, inputEmail)
+    #reated_profile = Created_Profile()
+    #return created_profile.created_profile(request, inputEmail)
+    return render(request, "Login.html")
     #return created_profile(request, inputEmail)
 
 """ class Profile_Creation_Post(View):

@@ -23,14 +23,12 @@
 <body class="bg-dark">
 
   <div class="container">
-      <div class="card card-register mx-auto mt-5">
-        
-        {{id}}
+      <div class="card  mx-auto mt-12">
        <div class="card-header">All Events</div>
         <div class="card-body">   
          {% for EventInfo in events %}
               <div>
-                  <h3><a href="/created_event/{{EventInfo.id}}">{{ EventInfo.EventName }}</a> </h3>
+                  <h5><a href="/created_event/{{EventInfo.id}}">{{ EventInfo.EventName }} </a>: {{ EventInfo.EventDescription }} </h5>
               </div>
           {% endfor %} 
         <div>
