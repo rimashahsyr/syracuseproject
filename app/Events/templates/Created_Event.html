@@ -73,7 +73,7 @@ Event Location : {{ event.EventLocation }}
 {% if event.OwnerId == event.UserId %}
 <h3><a href="/delete_event/{{event.id}}">Delete</a> </h3>
 <h3><a href="/NewCreatedEvent/{{event.id}}">Edit</a> </h3>
-{% if event.IsInitialized %}
+{% if not event.IsInitialized %}
 <h3><a href="/initialize_event/{{event.id}}">Initialize</a> </h3>
 {% endif %}
 {% endif %}

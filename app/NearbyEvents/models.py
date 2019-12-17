@@ -6,3 +6,6 @@ class LocationPreferences(models.Model):
     CafeContact = models.BigIntegerField()
     lat = models.FloatField(('Latitude'), blank=True, null=True)
     lon = models.FloatField(('Longitude'), blank=True, null=True)
+
+    def __str__ (self):
+        return self.cafeName
